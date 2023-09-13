@@ -1,6 +1,6 @@
 Snake Reinforcement Learning
 ===========================
-Training AI to play snake with Q-learning
+Training AI to play Snake with Q-learning
 
 Mason Miller <masonmil@umich.edu>
 
