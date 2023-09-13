@@ -119,5 +119,23 @@ def train():
             plot_mean_scores.append(mean_score)
             plot(plot_scores, plot_mean_scores)
 
+            if agent.n_games == 95:
+                game.change_speed(40)
+
+            if agent.n_games == 100:
+                break
+    
+    print('\n')
+    print('Summary:\n')
+    print('Total Games:', agent.n_games)
+    print('Record:', record)
+    print('Mean Score:', mean_score)
+
 if __name__ == '__main__':
     train()
+
+# Let the snake play for 100 games, then record the average and maximum score
+# Make adjustments to the model, and see how the average and maximum change
+# Try to find the best snake model
+
+# Deal with snake going in loops
