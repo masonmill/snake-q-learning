@@ -1,10 +1,8 @@
 Snake Reinforcement Learning
 ===========================
-Training snake AI with Q-Learning
+Training AI to play snake with Q-learning
 
-Winning snake utilizing various pathfinding techniques
-
-By Mason Miller <masonmil@umich.edu>
+Mason Miller <masonmil@umich.edu>
 
 ## Quick start
 ```console
