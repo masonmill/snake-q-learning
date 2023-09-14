@@ -32,20 +32,20 @@ class Agent:
         dir_d = game.direction == Direction.DOWN
 
         state = [
-            (dir_r and game.is_collision(point_r)) or # Danger straight
-            (dir_l and game.is_collision(point_l)) or
-            (dir_u and game.is_collision(point_u)) or
-            (dir_d and game.is_collision(point_d)),
+            (dir_r and game.collision(point_r)) or # Danger straight
+            (dir_l and game.collision(point_l)) or
+            (dir_u and game.collision(point_u)) or
+            (dir_d and game.collision(point_d)),
 
-            (dir_u and game.is_collision(point_r)) or # Danger right
-            (dir_d and game.is_collision(point_l)) or
-            (dir_l and game.is_collision(point_u)) or
-            (dir_r and game.is_collision(point_d)),
+            (dir_u and game.collision(point_r)) or # Danger right
+            (dir_d and game.collision(point_l)) or
+            (dir_l and game.collision(point_u)) or
+            (dir_r and game.collision(point_d)),
 
-            (dir_d and game.is_collision(point_r)) or # Danger left
-            (dir_u and game.is_collision(point_l)) or
-            (dir_r and game.is_collision(point_u)) or
-            (dir_l and game.is_collision(point_d)),
+            (dir_d and game.collision(point_r)) or # Danger left
+            (dir_u and game.collision(point_l)) or
+            (dir_r and game.collision(point_u)) or
+            (dir_l and game.collision(point_d)),
 
             dir_l, #direction
             dir_r,
@@ -76,17 +76,17 @@ class Agent:
 
     def get_action(self, state):
         self.epsilon = 80 - self.n_games
-        final_move = [0, 0, 0]
+        finalmove = [0, 0, 0]
         if random.randint(0, 200) < self.epsilon:
             move = random.randint(0, 2)
-            final_move[move] = 1
+            finalmove[move] = 1
         else:
             state0 = torch.tensor(state, dtype=torch.float)
             prediction = self.model(state0)
             move = torch.argmax(prediction).item()
-            final_move[move] = 1
+            finalmove[move] = 1
 
-        return final_move
+        return finalmove
     
 def train():
     plot_scores = []
@@ -97,11 +97,11 @@ def train():
     game = SnakeGameAI()
     while True:
         state_old = agent.get_state(game)
-        final_move = agent.get_action(state_old)
-        reward, done, score = game.play_step(final_move)
+        finalmove = agent.get_action(state_old)
+        reward, done, score = game.play_step(finalmove)
         state_new = agent.get_state(game)
-        agent.train_short_memory(state_old, final_move, reward, state_new, done)
-        agent.remember(state_old, final_move, reward, state_new, done)
+        agent.train_short_memory(state_old, finalmove, reward, state_new, done)
+        agent.remember(state_old, finalmove, reward, state_new, done)
 
         if done:
             game.reset()
@@ -125,7 +125,6 @@ def train():
             if agent.n_games == 100:
                 break
     
-    print('\n')
     print('Summary:\n')
     print('Total Games:', agent.n_games)
     print('Record:', record)
