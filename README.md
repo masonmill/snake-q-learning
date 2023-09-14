@@ -1,3 +1,12 @@
-# snake
+Snake Reinforcement Learning
+===========================
+Training AI to play Snake with Q-learning
 
-Snake game implementation in Python using Pygame.
+Mason Miller <masonmil@umich.edu>
+
+Inspired by Nancy Zhou
+
+## Quick start
+```console
+$ python3 main.py
+```
