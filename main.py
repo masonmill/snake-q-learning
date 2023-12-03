@@ -132,9 +132,3 @@ def train():
 
 if __name__ == '__main__':
     train()
-
-# Let the snake play for 100 games, then record the average and maximum score
-# Make adjustments to the model, and see how the average and maximum change
-# Try to find the best snake model
-
-# Deal with snake going in loops
